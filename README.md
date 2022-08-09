@@ -36,7 +36,7 @@ optional arguments:
 EXAMPLE
 =====================
 for repacking,  
->>      python run_GeoPacker.py --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC  --chainID A   
+>>      'python run_GeoPacker.py --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC  --chainID A'   
 
 
 for design,  
