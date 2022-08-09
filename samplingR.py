@@ -4,7 +4,7 @@ import numpy as np
 
 import random
 
-dataR = pd.read_csv('/home/lhlai_pkuhpc/lustre3/liujl/RD/distributionR/AA_rotamer_list',header=None,sep='\s+')
+dataR = pd.read_csv('AA_rotamer_list',header=None,sep='\s+')
 interval = np.linspace(-180,180,49)
 def samplingr(res,chi,chi_class):
     #dataR = pd.read_csv('/home/lhlai_pkuhpc/lustre3/liujl/RD/distribution/AA_rotamer_list',header=None,sep='\s+')
