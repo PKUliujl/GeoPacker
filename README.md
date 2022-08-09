@@ -11,6 +11,7 @@ INSTALLATION
 
 Usage
 ======================
+```
 usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME  
                         --chainID CHAINID [--seqfile SEQFILE] [--outputfile OUTPUTFILE] [--outputPATH OUTPUTPATH]  
 
@@ -31,7 +32,7 @@ optional arguments:
 >>                          pdbname_chainID_repackered.pdb  
 >    --outputPATH OUTPUTPATH, -oP OUTPUTPATH  
 >>                         the directory path of the outputfile. default: inputPATH  
-
+```
 
 EXAMPLE
 =====================
