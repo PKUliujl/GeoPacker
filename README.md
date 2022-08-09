@@ -47,6 +47,9 @@ for design,
 ```
 
 
+CITATION
+=====================
+If you find GeoPacker useful in your research, please cite:
 
 
 
