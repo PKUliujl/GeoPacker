@@ -5,7 +5,7 @@ The dependent libraries for GeoPacker are listed in the requirement.txt.
 
 INSTALLATION
 ======================
-1. Download by wget 
+1. Download by `git clone https://github.com/PKUliujl/GeoPacker.git` 
 2. Unzip the four files of pre-trained model parameters in the model folder
 
 
