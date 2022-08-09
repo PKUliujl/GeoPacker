@@ -1,13 +1,14 @@
 
 import pandas as pd
 import numpy as np
-
+import os
 import random
 
-dataR = pd.read_csv('AA_rotamer_list',header=None,sep='\s+')
+path = os.path.split(os.path.realpath(__file__)) [0]
+
+dataR = pd.read_csv(os.path.join(path,'AA_rotamer_list'),header=None,sep='\s+')
 interval = np.linspace(-180,180,49)
 def samplingr(res,chi,chi_class):
-    #dataR = pd.read_csv('/home/lhlai_pkuhpc/lustre3/liujl/RD/distribution/AA_rotamer_list',header=None,sep='\s+')
     #interval = np.linspace(-180,180,49)
     rotamer_list = dataR[ (dataR.iloc[:,0] == res) & (dataR.iloc[:,1] == chi) & (dataR.iloc[:,2] == chi_class) ].iloc[0,:].to_list()
     rn = random.choices([i for i in range(15)],weights = rotamer_list[3:], k=1)[0]
