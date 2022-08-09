@@ -11,15 +11,15 @@ INSTALLATION
 
 Usage
 ======================
-usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME
-                        --chainID CHAINID [--seqfile SEQFILE] [--outputfile OUTPUTFILE] [--outputPATH OUTPUTPATH]
+usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME  
+                        --chainID CHAINID [--seqfile SEQFILE] [--outputfile OUTPUTFILE] [--outputPATH OUTPUTPATH]  
 
-To better use the tool for protein side-chain modeling, please add some of these parameters
+To better use the tool for protein side-chain modeling, please add some of these parameters  
 
-optional arguments:
-  -h, --help            show this help message and exit
-  --purpose {0,1}       0 for repacker while 1 for sequence design
-  --inputPATH INPUTPATH, -iP INPUTPATH
+optional arguments:  
+  -h, --help            show this help message and exit  
+  --purpose {0,1}       0 for repacker while 1 for sequence design  
+  --inputPATH INPUTPATH, -iP INPUTPATH  
                         the directory path containing the pdb file
   --inputfile INPUTFILE, -i INPUTFILE
                         a pdb file, eg. 1a12.pdb/1a12_A.pdb
