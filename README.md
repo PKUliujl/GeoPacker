@@ -8,7 +8,7 @@ INSTALLATION
 1. Download it by `git clone https://github.com/PKUliujl/GeoPacker.git` 
 2. Unzip the four files of pre-trained model parameters in the `model` folder
 
-Before using GeoPacker, please ckeck whether the dependent packages are available in our environment (see `requirement.txt`)
+Before using GeoPacker, please ckeck whether the dependent packages are available in your environment (see `requirement.txt`)
 
 
 Usage
