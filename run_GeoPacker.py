@@ -14,10 +14,10 @@ config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
 session = tf.compat.v1.Session(config=config)
 
-model1 = torch.load('model/157_0_18.h5')
-model2 = torch.load('model/157_1_18.h5')
-model3 = torch.load('model/157_2_18.h5')
-model4 = torch.load('model/157_3_18.h5')
+model1 = torch.load('model/157_0_ft16.h5')
+model2 = torch.load('model/157_1_ft16.h5')
+model3 = torch.load('model/157_2_ft16.h5')
+model4 = torch.load('model/157_3_ft16.h5')
 
 
 
