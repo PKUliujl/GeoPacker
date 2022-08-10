@@ -31,11 +31,12 @@ optional arguments:
     --pdbname PDBNAME     a protein name, eg. 1A12/1a12  
     --chainID CHAINID     a protein chain to be packered, eg. A  
     --seqfile SEQFILE     a fasta format file including the sequences to be designed  
+    --outputPATH OUTPUTPATH, -oP OUTPUTPATH  
+                          the directory path of the outputfile. default: inputPATH
     --outputfile OUTPUTFILE, -o OUTPUTFILE  
                           the name of output file provided only for repacking. default:  
-                          pdbname_chainID_repackered.pdb  
-    --outputPATH OUTPUTPATH, -oP OUTPUTPATH  
-                          the directory path of the outputfile. default: inputPATH  
+                          pdbname_chainID_repacked.pdb  
+  
 ```
 
 EXAMPLE
