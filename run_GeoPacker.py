@@ -15,10 +15,13 @@ config = tf.compat.v1.ConfigProto()
 config.gpu_options.allow_growth = True
 session = tf.compat.v1.Session(config=config)
 
-model1 = torch.load('model/157_0_18.h5')
-model2 = torch.load('model/157_1_18.h5')
-model3 = torch.load('model/157_2_18.h5')
-model4 = torch.load('model/157_3_18.h5')
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+model1 = torch.load('model/157_0_ft16.h5', map_location = device)
+model2 = torch.load('model/157_1_ft16.h5', map_location = device)
+model3 = torch.load('model/157_2_ft16.h5', map_location = device)
+model4 = torch.load('model/157_3_ft16.h5', map_location = device)
 
 
 
@@ -61,7 +64,7 @@ def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None
             builder( os.path.join( feature_path, pdbname +'_' + chainID +'.pdb'), chainID,rotamers, outputfile )
         print('Done!',)
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 
 
 if  __name__ =='__main__':
