@@ -51,7 +51,7 @@ For design,
       python run_GeoPacker.py --purpose 1 --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
-Attention, do not usefollowing commands for design, otherwise, error will be reported:
+Attention, do not use following commands for design, otherwise, error will be reported:
 ```python
       python run_GeoPacker.py --purpose 1 --inputPATH example/ -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
       python run_GeoPacker.py --purpose 1 --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  seqfile
