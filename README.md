@@ -58,7 +58,7 @@ Attention, do not use following commands for design, otherwise, error will be re
       python run_GeoPacker.py --purpose 1  -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
-Reminder: Only the regular pdb format files are accepted as inputs. If an error occurs, please delete the intermediate output files and then rewrite the new parameters. Please feel free to contact me via email at liujl@stu.pku.edu.cn for other issues.  
+Reminder: Only the regular pdb format files are accepted as inputs. If an error occurs, please delete the intermediate output files and then rewrite the new parameters. Feel free to contact me via email at liujl@stu.pku.edu.cn for other issues.  
 
 CITATION
 =====================
