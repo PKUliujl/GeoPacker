@@ -11,7 +11,7 @@ INSTALLATION
 Before using GeoPacker, please check whether the dependent packages are available in your environment (see `requirement.txt`)
 
 
-Usage
+USAGE
 ======================
 ```
 usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME  
