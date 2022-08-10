@@ -22,10 +22,10 @@ def run_inputparameters():
         if args.seqfile is None :
             parser.error('With design purpose, a seqfile is required')
         if args.outputfile is None:
-            args.outputfile = os.path.join( args.outputPATH, args.pdbname +'_' + args.chainID + '_design.pdb')
+            args.outputfile =  args.pdbname +'_' + args.chainID + '_design.pdb'
     
     if args.outputfile is None and args.purpose==0:
-        args.outputfile = os.path.join( args.outputPATH, args.pdbname +'_' + args.chainID + '_repackered.pdb')
+        args.outputfile =  args.pdbname +'_' + args.chainID + '_repackered.pdb'
     
     return  args
 
