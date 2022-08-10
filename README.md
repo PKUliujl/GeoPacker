@@ -34,8 +34,8 @@ optional arguments:
     --outputPATH OUTPUTPATH, -oP OUTPUTPATH  
                           the directory path of the outputfile. default: inputPATH
     --outputfile OUTPUTFILE, -o OUTPUTFILE  
-                          the name of output. default: pdbname_chainID_repacked.pdb for 
-                          repacking and pdbname_chainID_design.pdb for design
+                          the name of output file. default: pdbname_chainID_repacked.pdb 
+                          for repacking and pdbname_chainID_design.pdb for design
   
 ```
 
