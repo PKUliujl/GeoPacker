@@ -84,6 +84,6 @@ if  __name__ =='__main__':
         seqname=None
         evaluate(feature_path, pdbname, chainID,seq_tobe_designed,seqname,packered_outPATH,outputfile)
     print(' '*13+'##############################################\n\
-             ##    Thanks for using the GeoPacker        ##\n\
+             ##      Thanks for using GeoPacker          ##\n\
              ##    More details see mdl.ipc.pku.edu.cn   ##\n\
              ##############################################\n')
