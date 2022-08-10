@@ -56,6 +56,8 @@ Attention, do not use the following command for design, otherwise, an error will
       python run_GeoPacker.py --purpose 1 --inputPATH example/ -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
+Reminder: Only the regular pdb format files are accepted as input. If an error occurs, please delete the intermediate output files and then rewrite the new parameters. 
+
 CITATION
 =====================
 If you find GeoPacker useful in your research, please cite it:
