@@ -278,7 +278,7 @@ def pre_fea(inputPATH,inputfile,pdbname,chainID):
     pool = ThreadPoolExecutor(max_workers=3)
     t1 = pool.submit(lambda p:preprocess_singlechain(*p),[inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID])
     t2 = pool.submit(lambda p:dihedral_angle(*p),[inputPATH,pdbname,os.path.join(inputPATH,inputfile),chainID])
-    t3 = pool.submit(lambda p:f2dgenerate(*p),[inputPATH,inputfile,chainID])
+    t3 = pool.submit(lambda p:f2dgenerate(*p),[inputPATH,inputfile,pdbname,chainID])
     t1_r = t1.result()
     t2_r = t2.result()
     t3_r = t3.result()
