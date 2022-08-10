@@ -27,7 +27,7 @@ optional arguments:
     --inputPATH INPUTPATH, -iP INPUTPATH    
                           the directory path containing the pdb file. default: './'  
     --inputfile INPUTFILE, -i INPUTFILE  
-                          a pdb file under INPUTPATH, eg. 1a12.pdb/1a12_A.pdb  
+                          a pdb file under inputPATH, eg. 1a12.pdb/1a12_A.pdb  
     --pdbname PDBNAME     a protein name, eg. 1A12/1a12  
     --chainID CHAINID     a protein chain to be packered, eg. A  
     --seqfile SEQFILE     a fasta format file including the sequences to be designed  
