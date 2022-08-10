@@ -26,7 +26,7 @@ model4 = torch.load('model/157_3_ft16.h5', map_location = device)
 
 
 def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None,packered_outPATH=None,outputfile=None ):
-    print('\nInput: %s'%pdbname+chainID, )
+    print('\nInput: %s %s'%(os.path.join(feature_path,inputfile), pdbname+chainID) )
     model1.eval()
     model2.eval()
     model3.eval()
@@ -57,10 +57,12 @@ def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None
                 rotamers.append( str(angle) )
             j+=1
         rotamers = [ float(i) for i in rotamers]
-        print('Writing to pdb file...',)
+        #print('Writing to pdb file...',)
         if seq_tobe_designed and packered_outPATH:
+            print( 'Writing to pdb file ( %s ) ...'%os.path.join(packered_outPATH,seqname +'.pdb') )
             builder( os.path.join( feature_path, pdbname +'_' + chainID +'.pdb'),chainID, rotamers, os.path.join( packered_outPATH, seqname +'.pdb'),seq_tobe_designed)
         else:
+            print( 'Writing to pdb file ( %s ) ...'%outputfile )
             builder( os.path.join( feature_path, pdbname +'_' + chainID +'.pdb'), chainID,rotamers, outputfile )
         print('Done!',)
 
