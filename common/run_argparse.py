@@ -5,7 +5,7 @@ import os
 def run_inputparameters():
     description='To better use the tool for protein side-chain modeling, please add some of these parameters'
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--purpose',type=int,choices=[0,1],help='0 for repacker while 1 for sequence design',default=0)
+    parser.add_argument('--purpose',type=int,choices=[0,1],help='0 for repacker while 1 for sequence design, default: 0',default=0)
     parser.add_argument('--inputPATH','-iP',type=str,help='the directory path containing the pdb file',default = './')
     parser.add_argument('--inputfile','-i',type=str,help='a pdb file, eg. 1a12.pdb/1a12_A.pdb',required=True)
     parser.add_argument('--pdbname',type=str,required=True, help='a protein name, eg. 1A12/1a12')
