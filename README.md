@@ -1,7 +1,7 @@
 # GeoPacker
 GeoPacker is a tool package using a simplified geometric deep learning coupling ResNet for protein side-chain modeling. Particularly, GeoPacker is suitable for large scale protein sequence design with side chain modeling due to the admirable efficiency and accuracy.
 
-![Alt text](https://github.com/PKUliujl/GeoPacker/image/4v17A.png)
+![Alt text](https://github.com/PKUliujl/GeoPacker/blob/main/image/4v17A.png)
 
 The dependent packages for GeoPacker are listed in the `requirement.txt`.
 
