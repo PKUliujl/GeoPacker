@@ -15,16 +15,18 @@ def run_inputparameters():
     parser.add_argument('--outputfile','-o',type=str,help='the name of output file.  default: pdbname_chainID_repacked.pdb')
     args = parser.parse_args()
     
+    if args.outputPATH is None:
+        args.outputPATH = args.inputPATH
+        
     if args.purpose == 1:
         if args.seqfile is None :
             parser.error('With design purpose, a seqfile is required')
+        if args.outputfile is None:
+            args.outputfile = os.path.join( args.outputPATH, args.pdbname +'_' + args.chainID + '_design.pdb')
     
     if args.outputfile is None and args.purpose==0:
-        args.outputfile = os.path.join( args.inputPATH, args.pdbname +'_' + args.chainID + '_repackered.pdb')
+        args.outputfile = os.path.join( args.outputPATH, args.pdbname +'_' + args.chainID + '_repackered.pdb')
     
-    if args.outputPATH is None:
-        args.outputPATH = args.inputPATH
-
     return  args
 
     
