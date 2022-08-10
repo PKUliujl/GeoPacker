@@ -26,7 +26,7 @@ model4 = torch.load('model/157_3_ft16.h5', map_location = device)
 
 
 def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None,packered_outPATH=None,outputfile=None ):
-    print('\nInput: %s %s'%(os.path.join(feature_path,inputfile), pdbname+chainID) )
+    print('\nInput: %s    %s   purpose: %d'%(os.path.join(feature_path,inputfile), pdbname+chainID, args.purpose) )
     model1.eval()
     model2.eval()
     model3.eval()
