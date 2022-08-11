@@ -54,9 +54,9 @@ def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None
                 sampling_interval = pred[j,rn].item()
                 res = standard_aa_names_r[ AA[j] ]
                 angle = samplingr( res, rn, sampling_interval)
-                rotamers.append( str(angle) )
+                rotamers.append( float(angle) )
             j+=1
-        rotamers = [ float(i) for i in rotamers]
+            
         print( 'Writing to pdb file ( %s ) ...'%os.path.join(packered_outPATH,seqname +'.pdb') )
         if seq_tobe_designed and packered_outPATH:
             builder( os.path.join( feature_path, inputfile),chainID, rotamers, os.path.join( packered_outPATH, outputfile),seq_tobe_designed)
