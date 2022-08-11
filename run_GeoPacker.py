@@ -57,7 +57,7 @@ def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None
                 rotamers.append( float(angle) )
             j+=1
             
-        print( 'Writing to pdb file ( %s ) ...'%os.path.join(packered_outPATH,seqname +'.pdb') )
+        print( 'Writing to pdb file ( %s ) ...'%os.path.join(packered_outPATH,outputfile) )
         if seq_tobe_designed and packered_outPATH:
             builder( os.path.join( feature_path, inputfile),chainID, rotamers, os.path.join( packered_outPATH, outputfile),seq_tobe_designed)
         else:
