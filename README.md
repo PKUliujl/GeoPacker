@@ -8,7 +8,7 @@ The dependent packages for GeoPacker are listed in the [requirement.txt](https:/
 INSTALLATION
 ======================
 1. Download it by `git clone https://github.com/PKUliujl/GeoPacker.git` 
-2. Unzip the four files of pre-trained model parameters in the `model` folder
+2. Unzip the four files of pre-trained model parameters in the [model](https://github.com/PKUliujl/GeoPacker/blob/main/model) folder
 
 Before using GeoPacker, please check whether the dependent packages are available in your environment (see [requirement.txt](https://github.com/PKUliujl/GeoPacker/blob/main/requirement.txt)). If not, using `pip` or `conda` to install them.
 
