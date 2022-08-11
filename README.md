@@ -3,7 +3,7 @@ GeoPacker is a tool package using a simplified geometric deep learning coupled R
 
 ![Alt text](https://github.com/PKUliujl/GeoPacker/blob/main/image/3mpcA.png)
 
-The dependent packages for GeoPacker are listed in the `[requirement.txt](https://github.com/PKUliujl/GeoPacker/blob/main/requirement.txt)`.
+The dependent packages for GeoPacker are listed in the [requirement.txt](https://github.com/PKUliujl/GeoPacker/blob/main/requirement.txt).
 
 INSTALLATION
 ======================
