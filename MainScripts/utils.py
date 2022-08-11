@@ -222,6 +222,7 @@ def read_seqfile(filename):
 
 
 
+path = os.path.split(os.path.realpath(__file__)) [0]
 
 def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
 
@@ -255,8 +256,8 @@ def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
 
 
     y_cato = torch.scatter( torch.zeros( nodectegory.size(0),20), 1, nodectegory.unsqueeze(1),1 ).float() 
-    physicochemistry = pd.read_csv('../physicochemisty',sep='\s+',header=None)
-    PSP19 = np.loadtxt('../PSP19')
+    physicochemistry = pd.read_csv(os.path.join(path,'../common/physicochemisty'),sep='\s+',header=None)
+    PSP19 = np.loadtxt(os.path.join(path,'../common/PSP19'))
     y_pc = torch.from_numpy(physicochemistry.iloc[:,1:].values)[nodectegory]
     y_psp = torch.from_numpy(PSP19)[nodectegory]
 
