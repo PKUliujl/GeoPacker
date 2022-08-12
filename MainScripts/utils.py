@@ -274,7 +274,7 @@ def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-
+"""
 def pre_fea(inputPATH,inputfile,pdbname,chainID):
     pool = ThreadPoolExecutor(max_workers=3)
     t1 = pool.submit(lambda p:preprocess_singlechain(*p),[inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID])
@@ -284,7 +284,19 @@ def pre_fea(inputPATH,inputfile,pdbname,chainID):
     t2_r = t2.result()
     t3_r = t3.result()
     return t1_r,t2_r,t3_r
+"""
 
+from multiprocessing import Pool
+def pre_fea(inputPATH,inputfile,pdbname,chainID):
+  pool = Pool(3)
+  multi_result = []
+  multi_result.append(pool.apply_async(func=preprocess_singlechain,args=( inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID)))
+  multi_result.append(pool.apply_async(func=dihedral_angle,args = (inputPATH,pdbname,os.path.join(inputPATH,inputfile),chainID)))
+  multi_result.append(pool.apply_async(func=f2dgenerate,args = ( inputPATH,inputfile,pdbname,chainID)))
+  pool.close()
+  pool.join()
+  [r1,r2,r3 ] = [i.get() for i in multi_result]
+  return r1,r2,r3
 
 
 
