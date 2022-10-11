@@ -65,7 +65,7 @@ Attention, do not use following commands for design, otherwise, error will be re
 
 To rebuild pseudo CB atoms given protein backbone atoms (i.e. C, N, O, CA), 
 ```
-      CBmodel.py Inputfile(pdb format) chainID Outputfile(pdb format)
+      run_CBbuilder.py Inputfile(pdb format) chainID Outputfile(pdb format)
 ```
 
 Reminder: Only the regular pdb format files are accepted as inputs. Feel free to contact me via email at liujl@stu.pku.edu.cn for other issues.  
