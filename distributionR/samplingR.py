@@ -16,11 +16,3 @@ def samplingr(res,chi,chi_class):
     angle = np.random.uniform(mini_interval[rn], mini_interval[rn+1],1)[0]
     return angle
 
-
-
-'''
-AA = "ARG LYS MET GLU GLN ASP ASN ILE LEU HIS TRP TYR PHE PRO THR VAL SER CYS"
-
-for res in AA.split():
-    print(sampleingir(res,0,47))
-'''
