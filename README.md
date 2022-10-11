@@ -27,7 +27,7 @@ optional arguments:
     -h, --help            show this help message and exit  
     --purpose {0,1}       0 for repacker while 1 for sequence design. default: 0
     --model_identity {pdb30,pdb60}
-                          model trained on different pair-wise identity dataset. default: pdb60
+                          model trained on different pair-wise sequence identity dataset. default: pdb60
     --inputPATH INPUTPATH, -iP INPUTPATH    
                           the directory path containing the pdb file. default: './'  
     --inputfile INPUTFILE, -i INPUTFILE  
