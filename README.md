@@ -62,7 +62,7 @@ Attention, do not use following commands for design, otherwise, error will be re
       python run_GeoPacker.py --purpose 1  -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
-To rebuild a pseudo CB atoms given protein backbone atoms (i.e. C, N, O, CA), 
+To rebuild pseudo CB atoms given protein backbone atoms (i.e. C, N, O, CA), 
 ```
       CBmodel.py Inputfile(pdb format) chainID Outputfile(pdb format)
 ```
