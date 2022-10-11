@@ -48,19 +48,19 @@ EXAMPLE
 =====================
 For repacking, 
 ```python
-      python run_GeoPacker.py --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC  --chainID A   
+      run_GeoPacker.py --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC  --chainID A   
 ```
 
 For design,  
 ```python
-      python run_GeoPacker.py --purpose 1 --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
+      run_GeoPacker.py --purpose 1 --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
 Attention, do not use following commands for design, otherwise, error will be reported:
 ```python
-      python run_GeoPacker.py --purpose 1 --inputPATH example/ -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
-      python run_GeoPacker.py --purpose 1 --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  seqfile
-      python run_GeoPacker.py --purpose 1  -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
+      run_GeoPacker.py --purpose 1 --inputPATH example/ -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
+      run_GeoPacker.py --purpose 1 --inputPATH example/ -i 3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  seqfile
+      run_GeoPacker.py --purpose 1  -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
 To rebuild pseudo CB atoms given protein backbone atoms (i.e. C, N, O, CA), 
@@ -69,7 +69,7 @@ To rebuild pseudo CB atoms given protein backbone atoms (i.e. C, N, O, CA),
 ```
 example: 
 ```
-run_CBbuilder.py example/3MPC_A.pdb A example/3MPC_A.CB.pdb
+      run_CBbuilder.py example/3MPC_A.pdb A example/3MPC_A.CB.pdb
 ```
 
 Reminder: Only the regular pdb format files are accepted as inputs. 
