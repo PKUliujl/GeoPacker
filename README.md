@@ -5,6 +5,7 @@ GeoPacker is a tool package using a simplified geometric deep learning coupled R
 
 The dependent packages for GeoPacker are listed in the [requirement.txt](https://github.com/PKUliujl/GeoPacker/blob/main/requirement.txt).
 
+
 INSTALLATION
 ======================
 1. Users can download it by `git clone https://github.com/PKUliujl/GeoPacker.git` (without pretrained model's parameters in the [model](https://github.com/PKUliujl/GeoPacker/blob/main/model) directory  due to the large size), alternatively, 
