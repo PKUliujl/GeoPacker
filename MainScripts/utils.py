@@ -5,14 +5,17 @@ import os,Bio
 import Bio.PDB
 from Bio.PDB.vectors import calc_dihedral
 from math import *
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
+from multiprocessing import Process,Queue
 from torch_geometric.data import Data
 import torch
 
 import warnings
 warnings.filterwarnings('ignore')
 
-from single import *
+from single_f import *
+from complex_f import *
+
 
 standard_aa_names = {
                    "ALA":0,
@@ -109,47 +112,6 @@ Rotamer_number = {0:0,
                  19:2
                 }
 
-def dihedral_angle(inputPATH, name,pdbPATH,chainID):
-    structure = Bio.PDB.PDBParser().get_structure(name,pdbPATH)
-
-    for model in structure:
-     for chain in model:
-      if chain.id in chainID:
-        delete_REScluster=[]
-        for residue in chain:
-            #print(residue.id)
-            if residue.get_resname() not in standard_a3_names:
-                delete_REScluster.append(residue.id)
-        if delete_REScluster!=[]:
-            #print(delete_REScluster)
-            for delete_res in delete_REScluster:
-                chain.detach_child(delete_res)
-    
-    for model in structure:
-        res = []
-        for chain in model:
-            if chain.id in chainID:
-                for residue in chain:
-                    res.append(residue)
-        
-        chain_pair = []
-        for residue1 in res:
-            for residue2 in res: 
-                eachpair = []
-                if residue1.id != residue2.id or residue1.get_parent().id != residue2.get_parent().id:
-                    #print(residue1.id,residue2.id,chain.id)
-                    O1N2 = calc_dihedral( residue1['O'].get_vector(), residue1['CA'].get_vector(), residue2['CA'].get_vector(),residue2['N'].get_vector())
-                    N1O2 = calc_dihedral( residue1['N'].get_vector(), residue1['CA'].get_vector(), residue2['CA'].get_vector(),residue2['O'].get_vector())
-                    eachpair.extend([sin(O1N2),cos(O1N2),sin(N1O2),cos(N1O2)])
-                else:
-                    eachpair.extend([0,1,0,1])
-                chain_pair.append(eachpair)
-        chain_pair = np.array(chain_pair).reshape( (len(res),len(res),4) )
-        #print('-----:',chain_pair.max())
-        np.save( os.path.join(inputPATH, name + '_' + chainID+'_orientation') ,chain_pair)
-        return torch.from_numpy(chain_pair)
-
-
 
 def f2dgenerate(path,name,pdbname,chainID):
     file = open(os.path.join(path, name), 'r')
@@ -197,7 +159,7 @@ def f2dgenerate(path,name,pdbname,chainID):
     a = 2 / (1 + a / 4)
     for i in range(len(a)):
         a[i, i] = 1
-    np.save( os.path.join(path, pdbname + '_' + chainID+'_dismap') ,a)
+    #np.save( os.path.join(path, pdbname + '_' + chainID+'_dismap') ,a)
     return torch.from_numpy(a)
 
 
@@ -219,7 +181,6 @@ def read_seqfile(filename):
                 mulseq.append(AA_label)
                 i+=2
             return mulseq
-
 
 
 path = os.path.split(os.path.realpath(__file__)) [0]
@@ -245,10 +206,8 @@ def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
         edgeindex = torch.from_numpy( np.loadtxt( os.path.join( feature_path, pdbID + '_' +chainID + '_edgeindex')).T ).long()
         #distance = f2dgenerate( feature_path, inputfile,pdbID,chainID) 
         distance = torch.from_numpy(np.load(os.path.join( feature_path, pdbID + '_' +chainID + '_dismap.npy'  )) )
-        #orientation = dihedral_angle(feature_path, pdbID, os.path.join(feature_path, pdbID +'_' + chainID +'.pdb'),  chainID)
-        orientation = torch.from_numpy( np.load(os.path.join( feature_path, pdbID + '_' +chainID + '_orientation.npy')) )
     else:
-        geometric_f, orientation, distance = pre_fea(feature_path,inputfile,pdbID,chainID)
+        geometric_f, distance = pre_fea(feature_path,inputfile,pdbID,chainID)
         [nodefeature, nodectegory, edgeattr, edgeindex] = [i for i in geometric_f]
 
     if seq_tobe_designed:
@@ -263,7 +222,7 @@ def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
 
     data = Data( x = torch.cat( ( nodefeature, y_pc, y_psp, y_cato ), 1), edge_attr=edgeattr, edge_index=edgeindex,)
     #print(distance.size(),orientation.size())
-    data.distance = torch.cat( (distance.unsqueeze(2), orientation), -1)
+    data.distance = distance.unsqueeze(2)
     
     AA_label = nodectegory.numpy()
     return AA_label, data
@@ -274,30 +233,55 @@ def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-"""
+
 def pre_fea(inputPATH,inputfile,pdbname,chainID):
-    pool = ThreadPoolExecutor(max_workers=3)
-    t1 = pool.submit(lambda p:preprocess_singlechain(*p),[inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID])
-    t2 = pool.submit(lambda p:dihedral_angle(*p),[inputPATH,pdbname,os.path.join(inputPATH,inputfile),chainID])
-    t3 = pool.submit(lambda p:f2dgenerate(*p),[inputPATH,inputfile,pdbname,chainID])
+    dis = f2dgenerate(inputPATH,inputfile,pdbname,chainID)
+    lengths = dis.size(0)
+    intervals = np.linspace(0,lengths,8)
+    #intervals2 = np.linspace(0,lengths,16)
+
+    pool = ProcessPoolExecutor(max_workers=7)
+    
+    if len(chainID)<=1:
+        t1 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[0],intervals[1]  )
+        t2 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[1],intervals[2]  )
+        t3 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[2],intervals[3]  )
+        t4 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[3],intervals[4]  )
+        t5 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[4],intervals[5]  )
+        t6 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[5],intervals[6]  )
+        t7 = pool.submit(preprocess_singlechain,inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[6],intervals[7]  )
+    else:
+        t1 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[0],intervals[1]  )
+        t2 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[1],intervals[2]  )
+        t3 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[2],intervals[3]  )
+        t4 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[3],intervals[4]  )
+        t5 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[4],intervals[5]  )
+        t6 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[5],intervals[6]  )
+        t7 = pool.submit(preprocess_complex, inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID, intervals[6],intervals[7]  )
+
+
     t1_r = t1.result()
     t2_r = t2.result()
     t3_r = t3.result()
-    return t1_r,t2_r,t3_r
-"""
+    t4_r = t4.result()
+    t5_r = t5.result()
+    t6_r = t6.result()
+    t7_r = t7.result()
+    '''
+    t8_r = t8.result()
+    t9_r = t9.result()
+    t10_r = t10.result()
+    t11_r = t11.result()
+    t12_r = t12.result()
+    t13_r = t13.result()
+    t14_r = t14.result()
+    t15_r = t15.result()
+    t16_r = t16.result()
+    t17_r = t17.result()
+    t18_r = t18.result()
+    '''
+    t_r2 = torch.cat((t1_r[0], t2_r[0],t3_r[0], t4_r[0],t5_r[0], t6_r[0],t7_r[0]),axis=0),torch.cat((t1_r[1], t2_r[1],t3_r[1],t4_r[1],t5_r[1],t6_r[1],t7_r[1]),axis=0),torch.cat((t1_r[2], t2_r[2],t3_r[2],t4_r[2],t5_r[2],t6_r[2],t7_r[2]),axis=0), torch.cat((t1_r[3], t2_r[3],t3_r[3],t4_r[3],t5_r[3],t6_r[3],t7_r[3]),axis=1)
 
-from multiprocessing import Pool
-def pre_fea(inputPATH,inputfile,pdbname,chainID):
-  pool = Pool(3)
-  multi_result = []
-  multi_result.append(pool.apply_async(func=preprocess_singlechain,args=( inputPATH,pdbname, os.path.join(inputPATH,inputfile), chainID)))
-  multi_result.append(pool.apply_async(func=dihedral_angle,args = (inputPATH,pdbname,os.path.join(inputPATH,inputfile),chainID)))
-  multi_result.append(pool.apply_async(func=f2dgenerate,args = ( inputPATH,inputfile,pdbname,chainID)))
-  pool.close()
-  pool.join()
-  [r1,r2,r3 ] = [i.get() for i in multi_result]
-  return r1,r2,r3
 
-
-
+    return t_r2,dis
 
