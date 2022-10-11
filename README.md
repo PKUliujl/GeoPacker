@@ -72,7 +72,7 @@ Reminder: Only the regular pdb format files are accepted as inputs. Feel free to
 
 ACKNOWLEDGEMENT
 =====================
-A part of the code used to reconstruct the side chain atomic coordinates was taken from [PeptideBuilder](https://peerj.com/articles/80/) and [opus-rota4](https://academic.oup.com/bib/article/23/1/bbab529/6461160?searchresult=1) and modified to met our requirements.
+A part of the code used to reconstruct the side chain atomic coordinates was taken from [PeptideBuilder](https://peerj.com/articles/80/) and [opus-rota4](https://academic.oup.com/bib/article/23/1/bbab529/6461160?searchresult=1) and modified to meet our requirements.
 
 CITATION
 =====================
