@@ -37,8 +37,7 @@ def evaluate( feature_path, pdbname, chainID,seq_tobe_designed=None,seqname=None
     with torch.no_grad():
 
         data = data.to(device)
-        AA =  AA_label
-        #print( tabel.iloc[ dataset_list[begins],0] + '_' +tabel.iloc[ dataset_list[begins],1] )        
+        AA =  AA_label       
         pred1,dis1,orien1 = model1(x = data.x.float(), edge_index = data.edge_index, edge_attr = data.edge_attr.float(),distance = data.distance.float(), ) #distance = data.distance.float()
         pred2,dis2,orien2 = model2(x = data.x.float(), edge_index = data.edge_index, edge_attr = data.edge_attr.float(),distance = data.distance.float(), )
         pred3,dis3,orien3 = model3(x = data.x.float(), edge_index = data.edge_index, edge_attr = data.edge_attr.float(),distance = data.distance.float(), )
