@@ -21,11 +21,13 @@ USAGE
 usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME  
                         --chainID CHAINID [--seqfile SEQFILE] [--outputfile OUTPUTFILE] [--outputPATH OUTPUTPATH]  
 
-To better use the tool for protein side-chain modeling, please add some of these parameters  
+To better use GeoPacker for protein side-chain modeling, please add some of these parameters  
 
 optional arguments:  
     -h, --help            show this help message and exit  
-    --purpose {0,1}       0 for repacker while 1 for sequence design. default: 0    
+    --purpose {0,1}       0 for repacker while 1 for sequence design. default: 0
+    --model_identity {pdb30,pdb60}
+                          model trained on different pair-wise identity dataset. default: pdb60
     --inputPATH INPUTPATH, -iP INPUTPATH    
                           the directory path containing the pdb file. default: './'  
     --inputfile INPUTFILE, -i INPUTFILE  
@@ -60,7 +62,7 @@ Attention, do not use following commands for design, otherwise, error will be re
       python run_GeoPacker.py --purpose 1  -i example/3MPC_A.pdb --pdbname 3MPC --chainID A --seqfile  example/seqfile
 ```
 
-Reminder: Only the regular pdb format files are accepted as inputs. If an error occurs, please delete the intermediate output files and then rewrite the new parameters. Feel free to contact me via email at liujl@stu.pku.edu.cn for other issues.  
+Reminder: Only the regular pdb format files are accepted as inputs. Feel free to contact me via email at liujl@stu.pku.edu.cn for other issues.  
 
 ACKNOWLEDGEMENT
 =====================
