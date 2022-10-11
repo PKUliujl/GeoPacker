@@ -8,9 +8,9 @@ The dependent packages for GeoPacker are listed in the [requirement.txt](https:/
 INSTALLATION
 ======================
 1. Users can download it by `git clone https://github.com/PKUliujl/GeoPacker.git` (without pretrained model's parameters in the [model](https://github.com/PKUliujl/GeoPacker/blob/main/model) directory  due to the large size), alternatively, 
-it is availble to access [our web](http://mdl.ipc.pku.edu.cn/) to get the full toolkit;
+it is available to access [our web](http://mdl.ipc.pku.edu.cn/) to get the full toolkit;
 2. Modify the PATH of python interpreter in the first line in `run_GeoPacker.py`;
-3. Add the directory PATH including `run_GeoPacker.py` to your enviroment PATH, and then type `run_GeoPacker.py` in any directory for friendly usage.
+3. Add the directory PATH including `run_GeoPacker.py` to your environment PATH, and then type `run_GeoPacker.py` in any directory for friendly usage.
 
 Before using GeoPacker, please check whether the dependent packages are available in your environment (see [requirement.txt](https://github.com/PKUliujl/GeoPacker/blob/main/requirement.txt)). If not, using `pip` or `conda` to install them.
 
@@ -25,7 +25,7 @@ To better use GeoPacker for protein side-chain modeling, please add some of thes
 
 optional arguments:  
     -h, --help            show this help message and exit  
-    --purpose {0,1}       0 for repacker while 1 for sequence design. default: 0
+    --purpose {0,1}       0 for repacking while 1 for sequence design. default: 0
     --model_identity {pdb30,pdb60}
                           model trained on different pair-wise sequence identity dataset. default: pdb60
     --inputPATH INPUTPATH, -iP INPUTPATH    
@@ -33,7 +33,7 @@ optional arguments:
     --inputfile INPUTFILE, -i INPUTFILE  
                           a pdb file under inputPATH, eg. 1a12.pdb/1a12_A.pdb  
     --pdbname PDBNAME     a protein name, eg. 1A12/1a12  
-    --chainID CHAINID     a protein chain to be packered, eg. A  
+    --chainID CHAINID     a protein chain to be packed, eg. A  
     --seqfile SEQFILE     a fasta format file including the sequences to be designed  
     --outputPATH OUTPUTPATH, -oP OUTPUTPATH  
                           the directory path of the outputfile. default: inputPATH
