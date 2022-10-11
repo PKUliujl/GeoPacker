@@ -18,7 +18,7 @@ Before using GeoPacker, please check whether the dependent packages are availabl
 USAGE
 ======================
 ```
-usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME  
+usage: run_GeoPacker.py [-h] [--purpose {0,1}] [--model_identity {pdb30,pdb60}] [--inputPATH INPUTPATH] --inputfile INPUTFILE --pdbname PDBNAME  
                         --chainID CHAINID [--seqfile SEQFILE] [--outputfile OUTPUTFILE] [--outputPATH OUTPUTPATH]  
 
 To better use GeoPacker for protein side-chain modeling, please add some of these parameters  
