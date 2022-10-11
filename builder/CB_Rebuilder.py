@@ -4,7 +4,7 @@ from myclass import Atoms, Residues,Myio
 from buildprotein import RebuildStructure
 
 
-def builder(inputpdbfile,chainID, torsions, outputpdbfile,seq_tobe_designed=None):
+def CB_REbuilder(inputpdbfile,chainID, outputpdbfile,seq_tobe_designed=None):
     atomsData_real = Myio.readPDB( inputpdbfile ,chainID )
     atomsData_mc = RebuildStructure.extractmc(atomsData_real = atomsData_real, seq_tobe_designed = seq_tobe_designed)
     residuesData_mc = Residues.getResidueData(atomsData_mc) 
@@ -18,6 +18,10 @@ def builder(inputpdbfile,chainID, torsions, outputpdbfile,seq_tobe_designed=None
     init_atoms_matrix = np.zeros((num_atoms, 3)).astype(np.float32) 
     init_atoms_matrix  = RebuildStructure.make_atoms_matrix(residuesData_mc, init_atoms_matrix)
 
-    atoms_matrix, atoms_matrix_name = RebuildStructure.rebuild( torsions, residuesData_mc, geosData, init_atoms_matrix)
+    atoms_matrix, atoms_matrix_name = RebuildStructure.rebuild_CBonly( residuesData_mc, geosData, init_atoms_matrix)
     return Myio.outputPDB(residuesData_mc, atoms_matrix, atoms_matrix_name, outputpdbfile)
 
+#torsions = [-176.7507334058261, 177.7274930724906, 3.0551482344470124,
+#                63.71558400920688, -175.25748257673447, -20.546273611836003,
+#                                -165.73889339698775, 99.79058511361026]
+#CB_REbuilder('4LID_A_test.pdb', 'A', 'test.pdb' )

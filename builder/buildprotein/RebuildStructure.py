@@ -71,6 +71,27 @@ def rebuild(rotamers, residuesData, geosData, init_atoms_matrix):
     
     return atoms_matrix, atoms_matrix_name
 
+
+def rebuild_CBonly( residuesData, geosData, init_atoms_matrix):
+
+    count = 0
+    atoms_matrix = []
+    atoms_matrix_name = []
+    for idx, (residue, geo) in enumerate(zip(residuesData, geosData)):
+
+        #num_rotamers = residue.num_dihedrals
+        #rotamer = rotamers[count: count+num_rotamers]
+
+        atoms, atoms_names = PeptideBuilder.get_coordinate_CB( residue, geo, init_atoms_matrix)
+        atoms_matrix.extend(atoms)
+        atoms_matrix_name.append(atoms_names)
+    #count += num_rotamers
+
+    #assert count == len(rotamers)
+
+    return atoms_matrix, atoms_matrix_name
+
+
 def make_atoms_matrix(residuesData, atoms_matrix):
     
     counter = 0

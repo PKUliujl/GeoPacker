@@ -627,6 +627,40 @@ def makeTrp(N, CA, C, O, CB, geo, atoms_matrix, residue, rotamer):
 
     return [CG, CD1, CD2, NE1, CE2, CE3, CZ2, CZ3, CH2], ["CG", "CD1", "CD2", "NE1", "CE2", "CE3", "CZ2", "CZ3", "CH2"]
 
+
+
+def get_coordinate_CB( residue, geo, atoms_matrix):
+
+    resname = residue.resname
+
+    all_atoms = []
+    all_atoms_names = []
+
+    N = atoms_matrix[residue.main_chain_atoms_matrixid["N"]]
+    CA = atoms_matrix[residue.main_chain_atoms_matrixid["CA"]]
+    C = atoms_matrix[residue.main_chain_atoms_matrixid["C"]]
+    O = atoms_matrix[residue.main_chain_atoms_matrixid["O"]]
+
+    all_atoms.append(N)
+    all_atoms.append(CA)
+    all_atoms.append(C)
+    all_atoms.append(O)
+
+    all_atoms_names.extend(["N", "CA", "C", "O", "CB"])
+
+    if resname == "G":
+        CB = residue.atoms["CB"].position
+        all_atoms.append(CB)
+        return all_atoms, all_atoms_names
+
+    CB = atoms_matrix[residue.main_chain_atoms_matrixid["CB"]]
+    all_atoms.append(CB)
+
+    # print (atoms)
+    return all_atoms, all_atoms_names
+
+
+
 def get_coordinate(rotamer, residue, geo, atoms_matrix):
     
     resname = residue.resname
