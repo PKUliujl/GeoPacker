@@ -199,18 +199,28 @@ def load_Data(feature_path,inputfile, pdbID, chainID,seq_tobe_designed=None):
             AA_label = [AA_single[i] for i in seq]
             AA_label = np.array(AA_label)
 
-    if os.path.exists(  os.path.join(feature_path,  pdbID + '_' +chainID + '_edgeindex')):
-        edgeattr = torch.from_numpy( np.loadtxt( os.path.join( feature_path, pdbID + '_' +chainID+'_edgeattr') ) )
-        nodefeature = torch.from_numpy( np.loadtxt( os.path.join( feature_path, pdbID + '_' +chainID + '_nodefeature')  ))
-        nodectegory = torch.from_numpy( np.loadtxt( os.path.join( feature_path, pdbID + '_' +chainID + '_nodecategory') ) ).long()
-        edgeindex = torch.from_numpy( np.loadtxt( os.path.join( feature_path, pdbID + '_' +chainID + '_edgeindex')).T ).long()
-        #distance = f2dgenerate( feature_path, inputfile,pdbID,chainID) 
-        distance = torch.from_numpy(np.load(os.path.join( feature_path, pdbID + '_' +chainID + '_dismap.npy'  )) )
+    if os.path.exists(os.path.join(os.path.abspath(feature_path),'tmp_features/%s'%(pdbID + '_' +chainID + '_features.npz'))):
+        print('Precomputed geometric features from protein backbone atoms existed in the file %s and it will be loaded directly for side-chain conformation prediction'%(os.path.join(os.path.abspath(feature_path),'tmp_features/%s'%(pdbID + '_' +chainID + '_features.npz'))))
+        
+        featuresfile = np.load(os.path.join(os.path.abspath(feature_path),'tmp_features/%s'%(pdbID + '_' +chainID + '_features.npz')))
+        edgeattr = torch.from_numpy( featuresfile['edgeattr'] )
+        nodefeature = torch.from_numpy( featuresfile['nodefeature'] )
+        nodectegory = torch.from_numpy( featuresfile['nodectegory'] )
+        edgeindex = torch.from_numpy( featuresfile['edgeindex'] )
+        distance = torch.from_numpy( featuresfile['distance'] )
     else:
+        if not os.path.exists(os.path.join(os.path.abspath(feature_path),'tmp_features')):
+            os.mkdir(os.path.join(os.path.abspath(feature_path),'tmp_features'))
+        
         geometric_f, distance = pre_fea(feature_path,inputfile,pdbID,chainID)
         [nodefeature, nodectegory, edgeattr, edgeindex] = [i for i in geometric_f]
+        np.savez( os.path.join(os.path.abspath(feature_path),'tmp_features/%s'%(pdbID + '_' +chainID + '_features.npz')), edgeattr = edgeattr.numpy(),nodefeature = nodefeature.numpy(),nodectegory = nodectegory.numpy(), edgeindex = edgeindex.numpy(), distance = distance.numpy())
+        print('Creat a directory "tmp_features" in %s and a temporary file %s will be saved in this directory'%(os.path.abspath(feature_path),pdbID + '_' +chainID + '_features.npz'))
+                
+                
 
     if seq_tobe_designed:
+        print('Sequence to be designed: ',os.popen(f'cat {seq_tobe_designed}').readlines()[1].strip())
         nodectegory = torch.from_numpy( AA_label ).long()
 
 
