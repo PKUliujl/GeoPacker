@@ -20,6 +20,9 @@ def run_inputparameters():
         if args.seqfile is None :
             parser.error('With design purpose, a seqfile is required')
     
+    if args.seqfile:
+        args.purpose = 1
+    
     if args.outputPATH is None:
         args.outputPATH = args.inputPATH
 
