@@ -12,7 +12,8 @@ INSTALLATION
 it is available to access [our disk](https://disk.pku.edu.cn:443/link/449F22FE2A06CD29D3C6DB182F4C38C2) with 
 Access Code `MBYd` to get these files;
 2. Modify the PATH of python interpreter in the first line in `run_GeoPacker.py`;
-3. Add the directory PATH including `run_GeoPacker.py` to your environment PATH, and then type/run `run_GeoPacker.py` in any directory for friendly usage.
+3. `chmod u+x run_GeoPacker.py`;
+4. Add the directory PATH including `run_GeoPacker.py` to your environment PATH, and then type/run `run_GeoPacker.py` in any directory for friendly usage.
 
 Before using GeoPacker, please check whether the dependent packages are available in your environment (see [requirement.txt](https://github.com/PKUliujl/GeoPacker/blob/main/requirement.txt)). If not, using `pip` or `conda` to install them.
 
