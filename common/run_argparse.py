@@ -11,7 +11,7 @@ def run_inputparameters():
     parser.add_argument('--inputfile','-i',type=str,help='a pdb file under inputPATH, eg. 1a12.pdb/1a12_A.pdb',required=True)
     parser.add_argument('--pdbname',type=str,required=True, help='a protein name, eg. 1A12/1a12')
     parser.add_argument('--chainID',type=str,required=True, help='a protein chain to be packed, eg. A')
-    parser.add_argument('--seqfile',type=str,help='a .A3M format file including the sequences to be designed')
+    parser.add_argument('--seqfile',type=str,help='a fasta format file including the sequence to be designed')
     parser.add_argument('--outputfile','-o',type=str,help='the name of output file. default: pdbname_chainID_repacked.pdb for repacking and pdbname_chainID_design.pdb for design')
     parser.add_argument('--outputPATH','-oP',type=str,help='the directory path of the outputfile. default: inputPATH')
     args = parser.parse_args()
