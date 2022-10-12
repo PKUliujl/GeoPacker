@@ -22,7 +22,7 @@ def readPDB(filename, chainID):
         if (line == "" or line[:3] == "END"):
             break
         else:
-            if (line[:4] == 'ATOM' or line[:6] == 'HETATM') and line[21] in chainID:
+            if line[:4] == 'ATOM' and line[21] in chainID:
                 atomid = line[6:11].strip()
                 name1 = line[11:16].strip()
                 resname = line[16:20].strip()
