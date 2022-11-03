@@ -5,7 +5,7 @@ import os
 def run_inputparameters():
     description='To better use GeoPacker for protein side-chain modeling, please add some of these parameters'
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--purpose',type=int,choices=[0,1],help='0 for repacking while 1 for sequence design. default: 0',default=0)
+    parser.add_argument('--purpose',type=int,choices=[0,1],help='0 for repacking while 1 for designed sequence. default: 0',default=0)
     parser.add_argument('--model_identity',type=str,choices=['pdb30','pdb60'],help='model trained on different pair-wise sequence identity dataset. default: pdb60',default='pdb60')
     parser.add_argument('--inputPATH','-iP',type=str,help='the directory path containing the pdb file. default: "./"',default = './')
     parser.add_argument('--inputfile','-i',type=str,help='a pdb file under inputPATH, eg. 1a12.pdb/1a12_A.pdb',required=True)
