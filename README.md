@@ -85,6 +85,7 @@ A part of the code used to reconstruct the side chain atomic coordinates was tak
 CITATION
 =====================
 If you find GeoPacker useful in your research, please cite it:
+```
 @article{https://doi.org/10.1002/pro.4484,
 author = {Liu, Jiale and Zhang, Changsheng and Lai, Luhua},
 title = {GeoPacker: a novel deep learning framework for protein side-chain modeling},
@@ -98,6 +99,6 @@ url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/pro.4484},
 eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/pro.4484},
 note = {e4484 PRO-22-0347.R1},
 }
-
+```
 
 
