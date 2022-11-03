@@ -28,7 +28,7 @@ To better use GeoPacker for protein side-chain modeling, please add some of thes
 
 optional arguments:  
     -h, --help            show this help message and exit  
-    --purpose {0,1}       0 for repacking while 1 for sequence design. default: 0
+    --purpose {0,1}       0 for repacking while 1 for designed sequence. default: 0
     --model_identity {pdb30,pdb60}
                           model trained on different pair-wise sequence identity dataset. default: pdb60
     --inputPATH INPUTPATH, -iP INPUTPATH    
