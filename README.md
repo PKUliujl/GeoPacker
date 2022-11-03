@@ -97,7 +97,7 @@ keywords = {deep learning, protein design, protein side-chain packing, protein s
 doi = {https://doi.org/10.1002/pro.4484},
 url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/pro.4484},
 eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/pro.4484},
-note = {e4484 PRO-22-0347.R1},
+note = {e4484 PRO-22-0347.R1}
 }
 ```
 
